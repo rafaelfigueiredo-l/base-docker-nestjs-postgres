@@ -15,7 +15,7 @@ services:
       - 3005:3005
     volumes:
       - ./server:/home/node/app
-    command: "npm run start:dev"
+    command: "yarn run start:dev"
     networks:
       - postgres
 
