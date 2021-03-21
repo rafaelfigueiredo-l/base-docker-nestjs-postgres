@@ -26,11 +26,11 @@ server/lerna-debug.log*
 server/.DS_Store
 
 # Tests
-server//coverage
-server//.nyc_output
+server/coverage
+server/.nyc_output
 
 # IDEs and editors
-server//.idea
+server/.idea
 server/.project
 server/.classpath
 server/.c9/
