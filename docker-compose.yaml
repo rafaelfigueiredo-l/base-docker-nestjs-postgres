@@ -1,7 +1,7 @@
-version: "3.7"
+version: '3.7'
 
 services:
-   server:
+  server:
     container_name: nestjs_server
     image: nestjs/server:1.0
     build:
@@ -11,13 +11,11 @@ services:
     restart: always
     depends_on:
       - db
-    env_file:
-      - ./.env
     ports:
-      - 30005:3005
+      - 3005:3005
     volumes:
       - ./server:/home/node/app
-    command: "yarn run start:dev"
+    command: "npm run start:dev"
     networks:
       - postgres
 
@@ -25,8 +23,12 @@ services:
     container_name: nestjs_db
     image: postgres
     restart: always
+    volumes:
+      - ./server_db:/var/lib/mysql
+    ports:
+      - 5432:5432
     environment:
-      POSTGRES_DB: 5432
+      POSTGRES_DB: nestjs_db
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
     networks:
@@ -37,5 +39,5 @@ networks:
     driver: bridge
 
 volumes:
-  app:
   server:
+  db:
