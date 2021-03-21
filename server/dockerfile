@@ -1,0 +1,8 @@
+FROM mhart/alpine-node:14
+RUN apk update
+WORKDIR /home/node/app
+COPY package.json ./
+RUN yarn install
+COPY . .
+EXPOSE 3000
+CMD [ "yarn", "run", "start:dev" ]
