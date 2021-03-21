@@ -1,0 +1,41 @@
+version: "3.7"
+
+services:
+   server:
+    container_name: nestjs_server
+    image: nestjs/server:1.0
+    build:
+      context: ./server
+      dockerfile: ./dockerfile
+    working_dir: /home/node/app
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+    ports:
+      - 30005:3005
+    volumes:
+      - ./server:/home/node/app
+    command: "yarn run start:dev"
+    networks:
+      - postgres
+
+  db:
+    container_name: nestjs_db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: 5432
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    networks:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  app:
+  server:
